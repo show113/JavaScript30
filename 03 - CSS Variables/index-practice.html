@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scoped CSS Variables and JS</title>
+</head>
+<body>
+  <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+
+  <div class="controls">
+    <label for="spacing">Spacing:</label>
+    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+
+    <label for="blur">Blur:</label>
+    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+
+    <label for="base">Base Color</label>
+    <input id="base" type="color" name="base" value="#ffc600">
+  </div>
+
+  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+
+  <style>
+
+    :root{  /*要讓整個CSS檔都能讀到變數(全域變數)，則可以把變數設定在 :root 選擇器裡，:root 為網頁的根元素，如果不習慣看到 :root，也可以設定在 body 或 html*/
+      --spacing:10px; /*宣告：--名稱: 值; 使用：屬性：var(--名稱, 預設值); ( 預設值為選填 )*/
+      --blur:10px;  
+      --base-color:#ffc600;
+    }
+
+    img{
+      padding:var(--spacing);
+      filter: blur(var(--blur));  /* CSS3的模糊濾鏡語法filter: blur(20px); */
+      background-color: var(--base-color);
+    }
+
+    body {
+      text-align: center;
+      background: #193549;
+      color: white;
+      font-family: 'helvetica neue', sans-serif;
+      font-weight: 100;
+      font-size: 50px;
+    }
+
+    .controls {
+      margin-bottom: 50px;
+    }
+
+    input {
+      width: 100px;
+    }
+  </style>
+
+  <script>
+    (function() {
+      //延伸練習：增加圓角控制、加入mousemove事件也可更動
+
+      let spacing = document.getElementById("spacing");
+      let blur = document.getElementById("blur");
+      let base = document.getElementById("base");
+
+      // alert(spacing.getAttribute("value"));
+      // alert(spacing.value);
+      spacing.addEventListener('change', setSpacing); //怎麼知道有change事件
+      blur.addEventListener('change', setBlur);
+      base.addEventListener('change', setBase);
+
+      function setSpacing(){
+        // document.documentElement.style.setProperty('--spacing',spacing.value + 'px');
+        document.documentElement.style.setProperty('--spacing', spacing.value + spacing.dataset.sizing); //取得data-*attribute屬性：.dataset.XXX，也等同於.getAttribute('data-sizing');
+      }
+      function setBlur(){
+        document.documentElement.style.setProperty('--blur', blur.value + blur.dataset.sizing);
+      }
+      function setBase(){
+        document.documentElement.style.setProperty('--base-color', base.value);
+      }
+    })();
+  </script>
+
+</body>
+</html>
