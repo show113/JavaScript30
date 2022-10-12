@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">hihat</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">kick</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">openhat</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">boom</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">ride</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">snare</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">tom</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">tink</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/clap.wav"></audio>
+  <audio data-key="83" src="sounds/hihat.wav"></audio>
+  <audio data-key="68" src="sounds/kick.wav"></audio>
+  <audio data-key="70" src="sounds/openhat.wav"></audio>
+  <audio data-key="71" src="sounds/boom.wav"></audio>
+  <audio data-key="72" src="sounds/ride.wav"></audio>
+  <audio data-key="74" src="sounds/snare.wav"></audio>
+  <audio data-key="75" src="sounds/tom.wav"></audio>
+  <audio data-key="76" src="sounds/tink.wav"></audio>
+
+<script>
+//大小寫
+//keycode
+//keydown
+let key = document.querySelectorAll('.key')
+let audio = document.getElementsByTagName("audio"); //注意<audio>元素不支援 IE8 以前的版本
+
+// function playAudio() {
+//   x.play();
+// }
+function keyDown(e) {
+  // if (e.keyCode === 65) {  //keyCode已棄用，目前某些瀏覽器仍支援，但未來隨時可能停止支援，請改用KeyboardEvent.code或KeyboardEvent.key
+  if (e.code === "KeyA") {
+    key[0].style.borderColor="yellow";
+    audio[0].play();  //Audio Object有播放play()的method，也有暫停pause()
+  // }else if (e.keyCode === 83) {
+  }else if (e.code === "KeyS") {
+    key[1].style.borderColor="yellow";
+    audio[1].play();
+  }else if (e.code === "KeyD") {
+    key[2].style.borderColor="yellow";
+    audio[2].play();
+  }else if (e.code === "KeyF") {
+    key[3].style.borderColor="yellow";
+    audio[3].play();
+  }else if (e.code === "KeyG") {
+    key[4].style.borderColor="yellow";
+    audio[4].play();
+  }else if (e.code === "KeyH") {
+    key[5].style.borderColor="yellow";
+    audio[5].play();
+  }else if (e.code === "KeyJ") {
+    key[6].style.borderColor="yellow";
+    audio[6].play();
+  }else if (e.code === "KeyK") {
+    key[7].style.borderColor="yellow";
+    audio[7].play();
+  }else if (e.code === "KeyL") {
+    key[8].style.borderColor="yellow";
+    audio[8].play();
+  }
+  
+  // alert(e.keyCode);
+  // alert(e.code);
+}
+function keyUp(e){
+  key[0].style.borderColor="black";
+  // audio[0].pause();
+  // audio[0].currentTime = 0;
+  key[1].style.borderColor="black";
+  key[2].style.borderColor="black";
+  key[3].style.borderColor="black";
+  key[4].style.borderColor="black";
+  key[5].style.borderColor="black";
+  key[6].style.borderColor="black";
+  key[7].style.borderColor="black";
+  key[8].style.borderColor="black";
+}
+
+document.addEventListener('keydown', keyDown);  //怎麼知道有keydown、keyup事件
+document.addEventListener('keyup', keyUp);
+
+</script>
+
+
+</body>
+</html>
