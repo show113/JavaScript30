@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+<script>
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+fetch(endpoint)
+  .then(function(response) {
+    // 直接轉成JSON格式
+    return response.json()
+}).then(function(j) {
+    // `j`會是一個JavaScript物件
+    console.log(j)
+}).catch(function(err) {
+    // Error :（
+})
+
+
+
+
+let keyin = document.querySelector(".search");
+
+keyin.addEventListener('change', getValue);
+
+function getValue(){
+  alert(this.value);
+}
+
+// 1.從input取得值
+// 2.拿input去比對是否符合清單
+// 	2-1 符合1筆/多筆→條列or標示
+// 	2-2 不符合→不處理
+// 3.把條列or標示的資料做顯示
+
+// ps.第2點的延伸：
+// a.清單→事先定義好的資料：無論是array、object、resource、txt、csv……，像此例是一個網路上的json（AJAX）
+// b.比對→完全相同or部分相同（字串比對用到regex, expression正規表達式）
+
+</script>
+</body>
+</html>
